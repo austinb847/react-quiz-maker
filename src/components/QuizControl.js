@@ -9,8 +9,10 @@ function QuizControl() {
   return (
     <React.Fragment>
       <h1>QUIZ CONTROL PLACEHOLDER</h1>
+      <h2>Test!</h2>
     </React.Fragment>
   )
 }
 
-export default QuizControl();
+export default QuizControl;
+
