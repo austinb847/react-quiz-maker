@@ -13,6 +13,7 @@ function Signin() {
       console.log(error.message);
     });
   }
+
   //////////////////////////////SIGN IN//////////////////////////////////
   function doSignIn(event) {
     event.preventDefault();
@@ -24,7 +25,6 @@ function Signin() {
       console.log(error.message);
     })
   }
-
 
   //////////////////////////////SIGN OUT//////////////////////////////////
   function doSignOut() {
