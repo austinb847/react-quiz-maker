@@ -11,17 +11,40 @@ function QuizDetail(props) {
     }
   ])
 
-  // const firestore = useFirestore();
+  const firestore = useFirestore();
 
-  // const questions = firestore.collection("questions").where("quizId", "==", "12345")
-  //   .get()
-  //   .then(function (querySnapshot) {
-  //     querySnapshot.forEach(function (doc) {
-  //       console.log(doc.id + " DATA: " + doc.data())
-  //     })
-  //   });
+  let questionsArray = [];
 
+  async function asyncGetQuestions() {
+    const questions = await firestore.collection("questions").where("quizId", "==", props.selectedQuizId)
+      .get()
+      .then(function (querySnapshot) {
+        // console.log("SNAPSHOT " + querySnapshot)
+        querySnapshot.forEach(function (doc) {
+          questionsArray.push(doc.data().question)
+          console.log("TRACK ARRAY " + questionsArray)
+          // console.log(doc.id + " DATA: " + doc.data())
+          // console.log(doc.id + " DATA: " + doc.data().question)
+        })
+      })
+    return questionsArray;
+  };
 
+  asyncGetQuestions();
+  // async function asyncGetQuestions() {
+  // const questionsArray = await firestor.collection("questions").where("quizId", "==", props.selectedQuizId).get().then(function (querySnapshot) {
+  // querySnapshot.map(async query => {
+
+  // })
+  // })
+
+  // const result = await Promise.all(asyncGetQuestions)
+
+  // console.log("IS LOADED " + isLoaded(questions));
+
+  // console.log("QUESTIONS LINE 31 " + questions);
+  // console.log("FINAL ARRAY " + questionsArray);
+  // console.log("IS LOADED " + isLoaded(questions));
   // useFirestoreConnect([
   //   {
   //     collection: "questions",
@@ -33,51 +56,36 @@ function QuizDetail(props) {
     ({ firestore: { data } }) => data.quizzes && data.quizzes[props.selectedQuizId]
   )
 
-  // const questions = useSelector(
-  //   ({ firestore: { data } }) => data.questions && (data.questions.quizId === "props.selectedQuizId")
-  // )
-
-  //  const questions = useSelector(state => state.firestore.ordered.question).where("quizId", "==", "12345");
-
-  //   .collection("questions")
-  // .where("quizId", "==", "12345")
-
-  // .collection("questions")
-  // .where("question", "==", "props.selectedQuizId")
-
-  //  can't get where of undefined
-  //  ({ firestore: { data } }) => data.questions.where("quizId", "==", "props.selectedQuizId")
   // if (!isLoaded(questions)) {
-  //   return (
-  //     <React.Fragment>
-  //       <h3>Loading...</h3>
-  //     </React.Fragment>
-  //   )
+  // return (
+  //   <React.Fragment>
+  //     <h3>Loading...</h3>
+  //   </React.Fragment>
+  // )
   // }
   // if (isLoaded(questions)) {
-  return (
 
+  // react component SUSPENSE will wait to render objects until available 
+  return (
     <React.Fragment >
       <h1>QUIZ DETAILS</h1>
       <h3>Name: {quiz.name}</h3>
       <h3>Author: {quiz.author}</h3>
-      {/* <h3>Questions:</h3>
-        {console.log(quiz)}
-        {console.log(questions)}
-
-        <div>
-          {questions.map((q) => {
-            return (<p>{q.question}</p>)
-          })}
-        </div> */}
+      <h3>Questions:</h3>
+      <div>{}</div>
+      <div>
+        {questionsArray.forEach((q) => {
+          return (<p>{q}</p>)
+        })}
+      </div>
       <button onClick={() => props.toggleQuestionForm(
         true)}>Add Question</button>
       <button onClick={() => props.changeSelectedQuiz(
         null)}>Back To List</button>
     </React.Fragment >
   )
-
 }
+
 
 QuizDetail.propTypes = {
   changeSelectedQuiz: PropTypes.func,

@@ -45,6 +45,8 @@ function NewQuestionForm(props) {
           placeholder="Answer 4" />
         <button type='submit'>Add Question</button>
       </form>
+      <button onClick={() => props.toggleQuestionForm(
+        false)}>Back To Details</button>
     </React.Fragment >
   )
 }

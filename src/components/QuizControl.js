@@ -18,49 +18,49 @@ function QuizControl() {
 
 
 
-  if (!isLoaded(auth)) {
+  // if (!isLoaded(auth)) {
+  //   return (
+  //     <React.Fragment>
+  //       <h3>Loading...</h3>
+  //     </React.Fragment>
+  //   )
+  // }
+  // if (isLoaded(auth) && auth.currentUser === null) {
+  //   return (
+  //     <React.Fragment>
+  //       <h3>Please Sign In!</h3>
+  //     </React.Fragment>
+  //   )
+  // }
+  // if (isLoaded(auth) && auth.currentUser !== null) {
+  if (addFormVisible) {
     return (
       <React.Fragment>
-        <h3>Loading...</h3>
+        < NewQuizForm toggleForm={toggleForm} changeSelectedQuiz={changeSelectedQuiz} />
       </React.Fragment>
     )
-  }
-  if (isLoaded(auth) && auth.currentUser === null) {
+  } else if (addQuestionFormVisible) {
     return (
       <React.Fragment>
-        <h3>Please Sign In!</h3>
+        < NewQuestionForm selectedQuizId={selectedQuizId} toggleQuestionForm={toggleQuestionForm} />
       </React.Fragment>
     )
-  }
-  if (isLoaded(auth) && auth.currentUser !== null) {
-    if (addFormVisible) {
-      return (
-        <React.Fragment>
-          < NewQuizForm toggleForm={toggleForm} changeSelectedQuiz={changeSelectedQuiz} />
-        </React.Fragment>
-      )
-    } else if (addQuestionFormVisible) {
-      return (
-        <React.Fragment>
-          < NewQuestionForm selectedQuizId={selectedQuizId} toggleQuestionForm={toggleQuestionForm} />
-        </React.Fragment>
-      )
-    } else if (selectedQuizId != null) {
-      return (
-        <React.Fragment>
-          <QuizDetail selectedQuizId={selectedQuizId} toggleQuestionForm={toggleQuestionForm} changeSelectedQuiz={changeSelectedQuiz} />
-        </React.Fragment>
-      )
-    } else {
-      return (
-        <React.Fragment>
-          <QuizList changeSelectedQuiz={changeSelectedQuiz} />
-          <button onClick={() => toggleForm(true)}> Create Quiz (ﾟДﾟ)</button>
-        </React.Fragment >
-      )
-    }
+  } else if (selectedQuizId != null) {
+    return (
+      <React.Fragment>
+        <QuizDetail selectedQuizId={selectedQuizId} toggleQuestionForm={toggleQuestionForm} changeSelectedQuiz={changeSelectedQuiz} />
+      </React.Fragment>
+    )
+  } else {
+    return (
+      <React.Fragment>
+        <QuizList changeSelectedQuiz={changeSelectedQuiz} />
+        <button onClick={() => toggleForm(true)}> Create Quiz (ﾟДﾟ)</button>
+      </React.Fragment >
+    )
   }
 }
+// }
 
 
 export default QuizControl;

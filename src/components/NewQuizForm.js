@@ -37,6 +37,8 @@ function NewQuizForm(props) {
           placeholder="Author" />
         <button type='submit'>Add Quiz</button>
       </form>
+      <button onClick={() => props.toggleForm(
+        false)}>Back To List</button>
     </React.Fragment >
   )
 }
