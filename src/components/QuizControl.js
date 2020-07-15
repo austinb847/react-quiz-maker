@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import QuizList from "./QuizList";
 import QuizDetail from "./QuizDetail";
+import NewQuizForm from "./NewQuizForm";
 // import { withFirestore, isLoaded } from 'react-redux-firebase'
 import { isLoaded } from 'react-redux-firebase';
 import { useFirebase } from "react-redux-firebase";
+import NewQuestionForm from "./NewQuestionForm";
 
 
 function QuizControl() {
 
   const firebase = useFirebase();
   const auth = firebase.auth();
-  const [selectedQuizId, changeSelectedQuiz] = useState(null) //hook 
+  const [selectedQuizId, changeSelectedQuiz] = useState(null) //hook
+  const [addFormVisible, toggleForm] = useState(false);
+  const [addQuestionFormVisible, toggleQuestionForm] = useState(false);
+
+
 
   if (!isLoaded(auth)) {
     return (
@@ -27,17 +33,30 @@ function QuizControl() {
     )
   }
   if (isLoaded(auth) && auth.currentUser !== null) {
-    if (selectedQuizId != null) {
+    if (addFormVisible) {
       return (
         <React.Fragment>
-          <QuizDetail selectedQuizId={selectedQuizId} changeSelectedQuiz={changeSelectedQuiz} />
+          < NewQuizForm toggleForm={toggleForm} changeSelectedQuiz={changeSelectedQuiz} />
+        </React.Fragment>
+      )
+    } else if (addQuestionFormVisible) {
+      return (
+        <React.Fragment>
+          < NewQuestionForm selectedQuizId={selectedQuizId} toggleQuestionForm={toggleQuestionForm} />
+        </React.Fragment>
+      )
+    } else if (selectedQuizId != null) {
+      return (
+        <React.Fragment>
+          <QuizDetail selectedQuizId={selectedQuizId} toggleQuestionForm={toggleQuestionForm} changeSelectedQuiz={changeSelectedQuiz} />
         </React.Fragment>
       )
     } else {
       return (
         <React.Fragment>
           <QuizList changeSelectedQuiz={changeSelectedQuiz} />
-        </React.Fragment>
+          <button onClick={() => toggleForm(true)}> Create Quiz (ﾟДﾟ)</button>
+        </React.Fragment >
       )
     }
   }

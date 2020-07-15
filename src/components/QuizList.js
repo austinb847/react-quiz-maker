@@ -19,7 +19,6 @@ function QuizList(props) {
         {quizzes.map((quiz) => {
           return (
             <React.Fragment>
-              {/* <h1>{props.quizDetailsShowing}</h1> */}
               <Quiz
                 changeSelectedQuiz={props.changeSelectedQuiz}
                 id={quiz.id}
