@@ -22,13 +22,13 @@ function QuizList(props) {
             <React.Fragment>
               {/* <h1>{props.quizDetailsShowing}</h1> */}
               <Quiz
-                // handleChangingSelectedQuiz={props.handleChangingSelectedQuiz}
+                handleChangingSelectedQuiz={props.handleChangingSelectedQuiz}
                 name={quiz.name}
                 author={quiz.author}
               />
               {/* separate function to show, then create a hook to determine how to display */}
-              <button onClick={() =>
-                !props.quizDetailsShowing}>See Details</button>
+              <button onClick={() => props.handleChangingSelectedQuiz(
+                !props.quizDetailsShowing)}>See Details</button>
 
               {/* // firestore.get({ collection: "quizzes", doc: quiz.id })
                 //   .then((quiz) => { 
@@ -40,6 +40,38 @@ function QuizList(props) {
                 //   author: quiz.get('author')
                 // }
                 // })*/}
+
+              {/* 
+                Travis method suggestion
+                useFirestoreConnect([
+                { collection: 'tickets',
+                 doc: ticketId }
+                ]);
+
+                also doc.data()
+                */}
+
+              {/* 
+
+                Ethan suggestion
+                  handleShowingDetailClick = (id) => {
+    const { dispatch } = this.props;
+    const firestoreSurvey = this.props.firestore.collection('surveys').doc(id)
+    let stateSurvey;
+    firestoreSurvey.get().then(function (doc) {
+      stateSurvey = { ...doc.data(), id: id }
+      // console.table(doc.data())
+      const action = a.selectSurvey(stateSurvey)
+      dispatch(action)
+    })
+                */}
+
+              {/* 
+                Julia Suggesti 
+                handleSurveySubmission(event) {
+    event.preventDefault();
+    numberOfResponses = await firestore.collection('surveys').doc(props.survey.id).collection('responses').get().then(snap => { return snap.size })
+    console.log(numberOfResponses);s*/}
 
             </React.Fragment>
           )
