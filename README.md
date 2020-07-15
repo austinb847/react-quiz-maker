@@ -1,6 +1,6 @@
 # **Quiz Maker**
 
-#### Author: **Jessica Hvozdovich and Chee Murakami**
+#### Author: **Jessica Hvozdovich, Chee Murakami, and Austin Butler**
 #### July 14, 2020
 
 ### Description
@@ -82,4 +82,4 @@ _Have a bug or an issue with this application? [Open a new issue](https://github
 
 This software is licensed under the MIT license.
 
-Copyright © 2020 **_Jessica Hvozdovich and Chee Murakami_**
+Copyright © 2020 **_Jessica Hvozdovich, Chee Murakami, and Austin Butler_**
