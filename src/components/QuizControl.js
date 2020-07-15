@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import QuizList from "./QuizList";
 import QuizDetail from "./QuizDetail";
 // import { withFirestore, isLoaded } from 'react-redux-firebase'
-import { isLoaded } from 'react-redux-firebase'
-import { useFirestore, useFirebase } from "react-redux-firebase";
+import { isLoaded } from 'react-redux-firebase';
+import { useFirebase } from "react-redux-firebase";
+
 
 function QuizControl() {
 
   const firebase = useFirebase();
   const auth = firebase.auth();
-  const [quizDetailsShowing, handleChangingSelectedQuiz] = useState(false)
-
+  const [selectedQuizId, changeSelectedQuiz] = useState(null) //hook 
 
   if (!isLoaded(auth)) {
     return (
@@ -27,16 +27,16 @@ function QuizControl() {
     )
   }
   if (isLoaded(auth) && auth.currentUser !== null) {
-    if (quizDetailsShowing) {
+    if (selectedQuizId != null) {
       return (
         <React.Fragment>
-          <QuizDetail quizDetailsShowing={quizDetailsShowing} handleChangingSelectedQuiz={handleChangingSelectedQuiz} />
+          <QuizDetail selectedQuizId={selectedQuizId} changeSelectedQuiz={changeSelectedQuiz} />
         </React.Fragment>
       )
     } else {
       return (
         <React.Fragment>
-          <QuizList quizDetailsShowing={quizDetailsShowing} handleChangingSelectedQuiz={handleChangingSelectedQuiz} />
+          <QuizList changeSelectedQuiz={changeSelectedQuiz} />
         </React.Fragment>
       )
     }
