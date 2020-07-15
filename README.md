@@ -77,6 +77,7 @@ _Have a bug or an issue with this application? [Open a new issue](https://github
 * Library for data vis (D3)
 * Are you sure? Display before deleting.
 * Login and Logout displayed with username/guest in nav bar depending on auth
+* Have option to have correct answer questions and provide user feedback.
 
 #### License
 
